@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Carent" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.App.Start" parent="Theme.SplashScreen">
+<!--                <item name="android:windowSplashScreenBackground">@color/black</item>-->
+        <item name="postSplashScreenTheme">@style/Theme.Carent</item>
+<!--                <item name="android:windowSplashScreenAnimatedIcon">@animator/logo_animatot</item>-->
+    </style>
+
+
+
+</resources>

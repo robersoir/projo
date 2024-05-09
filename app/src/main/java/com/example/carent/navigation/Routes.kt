@@ -1,0 +1,15 @@
+package com.example.Carent.navigation
+
+const val HOME_URL = "home"
+const val SIGNUP_URL = "signup"
+const val LOGIN_URL = "login"
+const val ADD_URL = "addscreen"
+const val VIEW_PRODUCTS_URL = "view_products"
+const val START_URL = "start"
+const val SPLASH_URL = "splash"
+const val HOMEPAGE_URL = "homepage"
+const val EXPLORE_URL = "explore"
+const val FAVOURITE_URL = "favourite"
+const val PROFILE_URL = "profile"
+const val PRODUCTLIST_URL = "productlist"
+const val PRODUCTDETAILS_URL = " productdetails"
