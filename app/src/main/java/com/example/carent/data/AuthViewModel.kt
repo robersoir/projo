@@ -4,8 +4,8 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.widget.Toast
 import androidx.navigation.NavHostController
-import com.example.Carent.navigation.HOME_URL
-import com.example.Carent.navigation.LOGIN_URL
+import com.example.carent.navigation.HOME_URL
+import com.example.carent.navigation.LOGIN_URL
 import com.example.carent.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

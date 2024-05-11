@@ -69,7 +69,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.carent.navigation.ADD_URL
+import com.example.carent.navigation.PRODUCTLIST_URL
 import com.example.carent.R
+import com.example.carent.navigation.ADD_PRODUCTS_URL
 import com.example.carent.ui.theme.CarentTheme
 import kotlinx.coroutines.launch
 
@@ -252,7 +255,10 @@ fun HomePage(navController:NavHostController) {
 
 
                         Icon(imageVector = Icons.Default.LocationOn, contentDescription = "",
-                            modifier =Modifier.align(Alignment.TopStart),
+                            modifier =Modifier.align(Alignment.TopStart)
+                                .clickable {
+                                    navController.navigate(PRODUCTLIST_URL)
+                                },
 //            if (isSystemInDarkTheme())Color.White else Color.Black
 
 
@@ -342,6 +348,7 @@ fun HomePage(navController:NavHostController) {
                         Icon(imageVector = Icons.Default.Menu, contentDescription = "",
                             modifier =Modifier.size(40.dp)
                                 .clickable {
+                                           navController.navigate(ADD_PRODUCTS_URL)
 
 
                                 },

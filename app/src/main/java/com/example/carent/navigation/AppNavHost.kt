@@ -1,5 +1,6 @@
-package com.example.Carent.navigation
+package com.example.carent.navigation
 
+//import com.example.carent.ui.theme.screens.addcars.ExploreScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -7,13 +8,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.carent.screens.explore.ProductListScreen
-import com.example.carent.ui.theme.screens.addcars.AddScreen
-//import com.example.carent.ui.theme.screens.addcars.ExploreScreen
+import com.example.carent.ui.theme.screens.addcars.AddProductScreen
 import com.example.carent.ui.theme.screens.favourite.FavouriteScreen
 import com.example.carent.ui.theme.screens.homepage.HomePage
+import com.example.carent.ui.theme.screens.products.AddProductsScreen
 import com.example.carent.ui.theme.screens.splashscreen.SplashScreen
 import com.example.carent.ui.theme.screens.start.StartScreen
 import com.example.carent.ui.theme.screens.users.ProfileScreen
+import com.example.carent.ui.theme.screens.products.ViewProductsScreen
 
 
 @Composable
@@ -35,12 +37,12 @@ fun AppNavHost(
 //        composable(HOME_URL){
 //            HomeScreen(navController = navController)
 //        }
-//        composable(ADD_PRODUCTS_URL){
-//            AddProductsScreen(navController = navController)
-//        }
-//        composable(VIEW_PRODUCTS_URL){
-//            ViewProductsScreen(navController = navController)
-//        }
+        composable(ADD_PRODUCTS_URL){
+            AddProductsScreen(navController = navController)
+        }
+        composable(VIEW_PRODUCTS_URL){
+            ViewProductsScreen(navController = navController)
+        }
         composable(START_URL){
            StartScreen(navController = navController, )
         }
@@ -51,8 +53,8 @@ fun AppNavHost(
             HomePage(navController = navController, )
         }
         composable(ADD_URL){
-AddScreen(navController = navController) {
-    
+AddProductScreen(navController = navController) {
+
 }
         }
         composable(FAVOURITE_URL){

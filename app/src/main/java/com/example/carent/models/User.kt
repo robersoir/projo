@@ -1,6 +1,6 @@
 package com.example.carent.models
 
-class User {
+class eUser {
     var name:String = ""
     var email:String = ""
     var password:String = ""

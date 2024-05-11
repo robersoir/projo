@@ -1,12 +1,11 @@
-@file:Suppress("PreviewAnnotationInFunctionWithParameters")
 
-package com.example.carent.ui.theme.screens.addcars
+package com.example.carent.screens.explore
+
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,13 +16,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -42,39 +45,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.example.carent.navigation.HOMEPAGE_URL
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.example.Carent.navigation.HOMEPAGE_URL
-import com.example.carent.models.Product
-import com.example.carent.ui.theme.CarentTheme
-import com.example.carent.ui.theme.screens.homepage.HomePage
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.toObject
 
-
-//data class Product(
-//    var id: String = "",
-//    val name: String = "",
-//    val description: String ="",
-//    val price: Double = 0.0,
-//    var imageUrl: String = ""
-//)
+data class Product(
+    var id: String = "",
+    val name: String = "",
+    val description: String ="",
+    val price: Double = 0.0,
+    var imageUrl: String = ""
+)
 
 
 
-@Suppress("PreviewAnnotationInFunctionWithParameters")
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview(showBackground = true)
 fun ProductListScreen(navController: NavController, products: List<Product>) {
     var isLoading by remember { mutableStateOf(true) }
     var productList by remember { mutableStateOf(emptyList<Product>()) }
@@ -99,14 +88,14 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
                         navController.navigate(HOMEPAGE_URL)
                     }) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White
                         )
                     }
                 },
 
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xff0FB06A),
                     titleContentColor = Color.White,
 
@@ -146,7 +135,7 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
                         // Load More Button
                         if (displayedProductCount < productList.size) {
                             Button(
-                                colors = ButtonDefaults.buttonColors( Color(0xff0FB06A)),
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff0FB06A)),
                                 onClick = { displayedProductCount += 1 },
                                 modifier = Modifier.align(Alignment.CenterHorizontally)
                             ) {
@@ -209,12 +198,3 @@ suspend fun fetchProduct(productId: String, onSuccess: (Product?) -> Unit) {
     val product = snapshot.toObject<Product>()
     onSuccess(product)
 }
-
-
-//@Composable
-//@Preview(showBackground = true)
-//fun ProductListScreenPreview(){
-//    CarentTheme {
-//        ProductListScreen(navController = rememberNavController(),)
-//    }
-//}

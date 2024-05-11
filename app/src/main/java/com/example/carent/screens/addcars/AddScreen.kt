@@ -1,6 +1,5 @@
 package com.example.carent.ui.theme.screens.addcars
 
-
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.widget.Toast
@@ -8,41 +7,50 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import com.example.Carent.navigation.EXPLORE_URL
-import com.example.Carent.navigation.HOMEPAGE_URL
+import com.example.carent.navigation.HOMEPAGE_URL
+import com.example.carent.navigation.PRODUCTLIST_URL
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.util.*
+import java.util.UUID
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddScreen(navController: NavController, onProductAdded: () -> Unit) {
+fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
     var productName by remember { mutableStateOf("") }
     var productDescription by remember { mutableStateOf("") }
     var productPrice by remember { mutableStateOf("") }
@@ -68,16 +76,16 @@ fun AddScreen(navController: NavController, onProductAdded: () -> Unit) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(EXPLORE_URL)
+                        navController.navigate(PRODUCTLIST_URL)
                     }) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White
                         )
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xff0FB06A),
                     titleContentColor = Color.White,
                 )
@@ -219,14 +227,15 @@ private fun addProductToFirestore(navController: NavController, onProductAdded: 
                         // Invoke the onProductAdded callback
                         onProductAdded()
                     }
-//                    .addOnFailureListener { e ->
+                    .addOnFailureListener { e ->
                         // Handle error updating product document
                     }
             }
         }
-//        .addOnFailureListener { e ->
+        .addOnFailureListener { e ->
             // Handle error adding product to Firestore
-
+        }
+}
 
 private fun uploadImageToStorage(productId: String, imageUri: Uri?, onSuccess: (String) -> Unit) {
     if (imageUri == null) {
